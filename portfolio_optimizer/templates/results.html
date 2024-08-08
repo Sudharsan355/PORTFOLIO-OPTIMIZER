@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Portfolio Optimization Results</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #1a1a1a;
+            color: #fff;
+            padding: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            flex-direction: column;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 30px;
+            width: 100%;
+        }
+
+        .container {
+            display: flex;
+            width: 100%;
+            max-width: 1200px;
+            justify-content: space-between;
+        }
+
+        .content {
+            flex: 1;
+            margin-right: 20px;
+        }
+
+        .image-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .section {
+            background-color: #333;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+            background-color: #444;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        p {
+            background-color: #444;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <h1>Portfolio Optimization Results</h1>
+    <div class="container">
+        <div class="content">
+            <div class="section">
+                <h2>Optimized Weights</h2>
+                <ul>
+                    {% for ticker, weight in weights.items() %}
+                        <li>{{ ticker }}: {{ weight|round(2) }}%</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            
+            <div class="section">
+                <h2>Performance</h2>
+                <p>Expected Annualized Portfolio Return: {{ portfolio_return|round(2) }}%</p>
+                <p>Annualized Portfolio Volatility: {{ portfolio_volatility|round(2) }}%</p>
+            </div>
+        </div>
+        
+        <div class="image-container">
+            <div class="section">
+                <h2>Efficient Frontier</h2>
+                <img src="data:image/png;base64,{{ plot_url }}" alt="Efficient Frontier">
+            </div>
+        </div>
+    </div>
+</body>
+</html>
